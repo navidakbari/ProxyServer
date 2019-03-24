@@ -54,6 +54,7 @@ class HttpParser:
                 return data[:i+2]
 
 
+
     @staticmethod
     def changeHttpVersion(request):
         reqStr = request.decode()
@@ -97,3 +98,5 @@ class HttpParser:
 
         reqStr = '\r\n'.join(reqStr)
         return reqStr.encode()
+
+
