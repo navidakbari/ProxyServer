@@ -114,3 +114,15 @@ class HttpParser:
             return resStr.split('\n')[0].split(' ')[1] == '200'
         except:
             return False
+
+    @staticmethod
+    def changeAcceptEncoding(request):
+        reqStr = request.decode()
+        reqStr = reqStr.split('\r\n')
+        for i in range(len(reqStr)) :
+            if reqStr[i].split(' ')[0] == 'Accept-Encoding:' :
+                reqStr[i] = 'Accept-Encoding: identity'
+                break
+        reqStr = '\r\n'.join(reqStr)
+        return reqStr.encode()
+
