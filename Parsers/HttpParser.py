@@ -100,6 +100,22 @@ class HttpParser:
         return reqStr.encode()
 
     @staticmethod
+    def isIndexReq(request):
+
+        reqStr = request.decode()
+        try:
+            return reqStr.split('\r\n')[0].split(' ')[1] == '/'
+        except :
+            return False
+    @staticmethod
+    def isResponseStatusOk(responseHeader):
+        resStr = responseHeader.decode()
+        try:
+            return resStr.split('\n')[0].split(' ')[1] == '200'
+        except:
+            return False
+
+    @staticmethod
     def changeAcceptEncoding(request):
         reqStr = request.decode()
         reqStr = reqStr.split('\r\n')
@@ -109,3 +125,4 @@ class HttpParser:
                 break
         reqStr = '\r\n'.join(reqStr)
         return reqStr.encode()
+
